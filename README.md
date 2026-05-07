@@ -1,2 +1,2 @@
-# ha-battery-dashboard-card
-Home Assistant custom battery card 
+# ha-dashboard
+Home Assistant custom dashboard
