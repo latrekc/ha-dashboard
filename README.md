@@ -1,7 +1,8 @@
-# ha-battery-dashboard-card
-Home Assistant custom battery card 
+# ha-dashboard
+Home Assistant custom dashboard
 
-## Card contains fields:
+## battery-card
+### Card contains fields:
 - device name
 - device type (plant, motion sensor, temperature/humidity sensor, door sensor, ups, button/switch)
 - area
