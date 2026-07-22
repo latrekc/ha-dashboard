@@ -1,1 +1,11 @@
 node_modules
+dist/
+*.log
+storybook-static/
+.storybook-cache
+.storybook/mocks/*.json
+!.storybook/mocks/.gitkeep
+.storybook/mocks/api/
+.env
+coverage
+expected-tree.yaml
