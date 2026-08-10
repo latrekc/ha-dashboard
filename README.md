@@ -14,6 +14,8 @@ structure is contractual.
 
 - The **dashboard strategy** follows Home Assistant's
   [custom strategy contract](https://developers.home-assistant.io/docs/frontend/custom-ui/custom-strategy/)
+  — `custom:latrekc-dashboard` → `ll-strategy-dashboard-latrekc-dashboard` per
+  [`get-strategy.ts#L97-L116`](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/strategies/get-strategy.ts#L97-L116) —
   and extends `ReactiveElement`.
 - Every **card** follows Home Assistant's
   [custom card contract](https://developers.home-assistant.io/docs/frontend/custom-ui/custom-card)
@@ -30,11 +32,11 @@ Add a resource:
 
 ### Dashboard creation
 
-Dashboards → Add → Strategy type `custom:latrekc-dashboard-strategy`:
+Dashboards → Add → Strategy type `custom:latrekc-dashboard` (element `ll-strategy-dashboard-latrekc-dashboard`, `window.customStrategies` type `latrekc-dashboard`, see [`get-strategy.ts#L97-L116`](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/strategies/get-strategy.ts#L97-L116)):
 
 ```yaml
 strategy:
-  type: custom:latrekc-dashboard-strategy
+  type: custom:latrekc-dashboard
 ```
 
 ### Deployment
