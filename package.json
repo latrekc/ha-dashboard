@@ -13,6 +13,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "fetch:mock": "node --loader ts-node/esm scripts/fetch-mock.ts",
+    "dump:tree": "node --loader ts-node/esm scripts/dump-tree.ts",
     "generate:tree": "node --loader ts-node/esm scripts/build-tree.ts",
     "generate:tree:holdout": "node --loader ts-node/esm scripts/build-tree.ts --holdout",
     "generate:trees": "npm run generate:tree && npm run generate:tree:holdout",
