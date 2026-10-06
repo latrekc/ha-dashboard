@@ -77,11 +77,6 @@ function makeHass(): Record<string, unknown> {
   }
   return {
     states,
-    entities: Object.fromEntries(
-      ENTITIES.map((e) => [e.entity_id as string, e]).filter(([id]) => typeof id === 'string')
-    ),
-    devices: Object.fromEntries(DEVICES.map((d) => [d.id as string, d])),
-    areas: Object.fromEntries(AREAS.map((a) => [a.area_id, a])),
     callWS: async (msg: Record<string, unknown>) => {
       if (msg.type === 'config/entity_registry/list') return ENTITIES;
       if (msg.type === 'config/device_registry/list') return DEVICES;
@@ -143,7 +138,17 @@ const HEADER =
 async function describeTree(): Promise<{ views: unknown[] }> {
   const mdiAll = (await import('@mdi/js')) as unknown as Record<string, string>;
   // Strategy first: without it there is no tree at all.
-  const { LatrekcDashboardStrategy } = await import('../src/strategy/latrekc-dashboard-strategy');
+  // Guarded like the card imports below: on branches where the strategy
+  // file doesn't exist yet this degrades to an empty tree instead of failing.
+  // (Non-literal specifier, so tsc doesn't resolve a file that may be absent.)
+  const STRATEGY_SPEC = '../src/strategy/latrekc-dashboard-strategy';
+  const strategyMod: unknown = await import(STRATEGY_SPEC).catch(() => undefined);
+  if (strategyMod === undefined) return { views: [] };
+  const { LatrekcDashboardStrategy } = strategyMod as {
+    LatrekcDashboardStrategy: {
+      generate: (config: unknown, hass: unknown) => Promise<{ views: unknown }>;
+    };
+  };
   // Cards individually: a stripped/missing card file must degrade that card
   // to an empty placeholder, not fail the run — so each import is guarded.
   // (The barrel `src/index` can't be used: one missing file breaks it whole.)
